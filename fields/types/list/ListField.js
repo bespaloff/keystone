@@ -15,14 +15,15 @@ function generateId () {
 	return i++;
 };
 
-const ItemDom = ({ name, id, onRemove, children }) => (
+const ItemDom = ({ name, id, onRemove, index, children }) => (
 	<div style={{
 		borderTop: '2px solid #eee',
 		paddingTop: 15,
 	}}>
 		{name && <input type="hidden" name={name} value={id}/>}
+		<h3>#{index}</h3>
 		{children}
-		<div style={{ textAlign: 'right', paddingBottom: 10 }}>
+		<div style={{ marginTop:'40px', textAlign: 'right', paddingBottom: 10 }}>
 			<Button size="xsmall" color="danger" onClick={onRemove}>
 				Remove
 			</Button>
@@ -109,7 +110,7 @@ module.exports = Field.create({
 					const onRemove = e => this.removeItem(index);
 
 					return (
-						<ItemDom key={id} {...{ id, name, onRemove }}>
+						<ItemDom key={id} {...{ id, name, onRemove, index }}>
 							{this.renderFieldsForItem(index, value)}
 						</ItemDom>
 					);
